@@ -25,6 +25,7 @@ interface TemplateOption {
     title: string
     description: string
     icon: JSX.Element
+    route: string
 }
 
 const templateOptions: TemplateOption[] = [
@@ -32,19 +33,29 @@ const templateOptions: TemplateOption[] = [
         id: "blank",
         title: "Start from blank",
         description: "",
-        icon: <Plus className="h-8 w-8 text-muted-foreground" />
+        icon: <Plus className="h-8 w-8 text-muted-foreground" />,
+        route: '/create-agent'
+    },
+    {
+        id: "sell",
+        title: "Sell and Promotion",
+        description: "Promote products, persuade clients into buying stuff.",
+        icon: <Phone className="h-8 w-8 text-muted-foreground" />,
+        route: '/create-agent'
     },
     {
         id: "healthcare",
         title: "Healthcare Check-In",
         description: "Ask questions to gather information, can transfer call.",
-        icon: <Phone className="h-8 w-8 text-muted-foreground" />
+        icon: <Phone className="h-8 w-8 text-muted-foreground" />,
+        route: '/create-agent'
     },
     {
         id: "notification",
         title: "Notification",
         description: "After giving the notification, end the call.",
-        icon: <Phone className="h-8 w-8 text-muted-foreground" />
+        icon: <Phone className="h-8 w-8 text-muted-foreground" />,
+        route: '/create-agent'
     }
 ]
 
@@ -244,7 +255,7 @@ export default function Dashboard() {
                                 key={template.id}
                                 className="flex flex-col items-center rounded-lg border p-4 text-center hover:bg-muted/50"
                                 onClick={() => {
-                                    navigate('/create-agent')
+                                    navigate(template.route)
                                     setIsModalOpen(false)
                                 }}
                             >
