@@ -15,10 +15,43 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Agent } from '@/interfaces/Dashboard'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+
+
+interface TemplateOption {
+    id: string
+    title: string
+    description: string
+    icon: JSX.Element
+}
+
+const templateOptions: TemplateOption[] = [
+    {
+        id: "blank",
+        title: "Start from blank",
+        description: "",
+        icon: <Plus className="h-8 w-8 text-muted-foreground" />
+    },
+    {
+        id: "healthcare",
+        title: "Healthcare Check-In",
+        description: "Ask questions to gather information, can transfer call.",
+        icon: <Phone className="h-8 w-8 text-muted-foreground" />
+    },
+    {
+        id: "notification",
+        title: "Notification",
+        description: "After giving the notification, end the call.",
+        icon: <Phone className="h-8 w-8 text-muted-foreground" />
+    }
+]
 
 export default function Dashboard() {
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const navigate = useNavigate()
+
     const [agents] = useState<Agent[]>([
         {
             id: "1",
@@ -137,7 +170,7 @@ export default function Dashboard() {
                     <div className="w-full flex-1">
                         <h1 className="text-lg font-semibold">Agents</h1>
                     </div>
-                    <Button>
+                    <Button onClick={() => setIsModalOpen(true)}>
                         <Plus className="mr-2 h-4 w-4" />
                         Create an Agent
                     </Button>
@@ -200,6 +233,33 @@ export default function Dashboard() {
                     </div>
                 </main>
             </div>
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogContent className="sm:max-w-[800px]">
+                    <DialogHeader>
+                        <DialogTitle>Select Template</DialogTitle>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4 md:grid-cols-3">
+                        {templateOptions.map((template) => (
+                            <button
+                                key={template.id}
+                                className="flex flex-col items-center rounded-lg border p-4 text-center hover:bg-muted/50"
+                                onClick={() => {
+                                    navigate('/create-agent')
+                                    setIsModalOpen(false)
+                                }}
+                            >
+                                <div className="mb-4 rounded-full bg-muted p-6">
+                                    {template.icon}
+                                </div>
+                                <h3 className="mb-2 font-semibold">{template.title}</h3>
+                                {template.description && (
+                                    <p className="text-sm text-muted-foreground">{template.description}</p>
+                                )}
+                            </button>
+                        ))}
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }
