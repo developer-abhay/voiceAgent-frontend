@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { CalendarDays, Download, Search, Settings } from "lucide-react"
 import { format } from "date-fns"
-
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -80,12 +79,12 @@ export default function CallLogs() {
 
     return (
         <div className="flex flex-col h-full">
-            <div className="border-b">
+            <div className="border-b px-4">
                 <div className="container flex items-center gap-4 py-4">
                     <h1 className="text-lg font-semibold">Call Logs</h1>
                 </div>
             </div>
-            <div className="container py-4">
+            <div className="container p-4">
                 <div className="rounded-lg border">
                     <div className="p-4 space-y-4">
                         <div className="grid gap-4 md:grid-cols-5">

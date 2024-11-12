@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { MoreVertical, Plus, Bot, Book, Phone, History, CreditCard, Key, Webhook, HelpCircle } from "lucide-react"
+import { MoreVertical, Plus, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
     DropdownMenu,
@@ -15,10 +15,9 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import { Link, Route, Routes, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Agent } from '@/interfaces/Dashboard'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 
 interface TemplateOption {

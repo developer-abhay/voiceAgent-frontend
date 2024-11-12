@@ -1,4 +1,4 @@
-import { Bot, Book, Phone, History, CreditCard, Key, Webhook, HelpCircle } from "lucide-react"
+import { Bot, Phone, History, CreditCard, Key, Webhook, HelpCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link, NavLink } from "react-router-dom"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -11,29 +11,24 @@ const menu = {
             icon: <Bot className="h-4 w-4" />
         },
         {
-            route: '',
-            title: "KnowledgeBase",
-            icon: <Book className="h-4 w-4" />
-        },
-        {
-            route: '',
+            route: '#',
             title: "Phone Numbers",
             icon: <Phone className="h-4 w-4" />
         }
     ],
     menu2: [
         {
-            route: '',
+            route: '#',
             title: "Billing",
             icon: <CreditCard className="h-4 w-4" />
         },
         {
-            route: '',
+            route: '#',
             title: "Api Keys",
             icon: <Key className="h-4 w-4" />
         },
         {
-            route: '',
+            route: '#',
             title: "Webhooks",
             icon: <Webhook className="h-4 w-4" />
         },
@@ -92,14 +87,17 @@ const Sidebar = () => {
                         </Accordion>
 
                         {menu.menu2.map((item, index) =>
-                            <Link
+                            <NavLink
                                 key={index}
-                                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-accent-foreground"
                                 to={item.route}
+                                className={({ isActive }) =>
+                                    `flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isActive ? 'bg-accent text-accent-foreground transition-all hover:text-accent-foreground' : 'text-muted-foreground transition-all hover:text-accent-foreground'
+                                    }`
+                                }
                             >
                                 {item.icon}
                                 {item.title}
-                            </Link>
+                            </NavLink>
                         )}
 
                     </nav>
