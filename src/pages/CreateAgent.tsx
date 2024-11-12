@@ -50,7 +50,7 @@ export default function CreateAgent() {
         <div className="flex min-h-screen flex-col">
             {/* Header section remains unchanged */}
             <header className="flex h-14 lg:h-[60px] items-center gap-4 border-b bg-muted/40 px-6">
-                <Link to="/" className="flex items-center gap-2">
+                <Link to="/dashboard" className="flex items-center gap-2">
                     <ArrowLeft className="h-4 w-4" />
                     <span>Back</span>
                 </Link>

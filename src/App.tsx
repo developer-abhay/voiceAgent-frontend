@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/login' element={<AuthPage />} />
-        <Route path='/' element={<Dashboard />} />
+        <Route path='/dashboard/*' element={<Dashboard />} />
         <Route path='/create-agent' element={<CreateAgent />} />
       </Routes>
     </Router>
