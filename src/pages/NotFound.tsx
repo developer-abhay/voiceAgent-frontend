@@ -13,7 +13,7 @@ export default function NotFound() {
                     Sorry, we couldn't find the page you're looking for. It might have been moved, deleted, or never existed.
                 </p>
                 <div className="flex gap-4">
-                    <Link to="/">
+                    <Link to="/dashboard">
                         <Button>
                             <Home className="mr-2 h-4 w-4" />
                             Back to Dashboard

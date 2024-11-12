@@ -1,12 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Bot } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { useLocation, useNavigate } from "react-router-dom"
 
 export default function AuthPage() {
-  const [isLogin, setIsLogin] = useState(true)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [isLogin, setIsLogin] = useState(location.pathname === "/login")
+
+  // const [isLogin, setIsLogin] = useState(true)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -17,8 +22,22 @@ export default function AuthPage() {
     console.log(isLogin ? "Logging in" : "Registering", { name, email, password })
   }
 
+  const toggleAuthMode = () => {
+    // Toggle between login and register views
+    if (isLogin) {
+      navigate("/register")
+    } else {
+      navigate("/login")
+    }
+  }
+
+  useEffect(() => {
+    // Update isLogin state based on URL
+    setIsLogin(location.pathname === "/login")
+  }, [location.pathname])
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/40 p-4">
+    <div key={location.pathname} className="flex min-h-screen items-center justify-center bg-muted/40 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-center gap-2">
@@ -73,7 +92,8 @@ export default function AuthPage() {
               {isLogin ? "Don't have an account? " : "Already have an account? "}
               <Button
                 className="p-0 text-primary underline"
-                onClick={() => setIsLogin(!isLogin)}
+                // onClick={() => setIsLogin(!isLogin)}
+                onClick={toggleAuthMode}
                 variant="link"
               >
                 {isLogin ? "Register" : "Login"}

@@ -3,6 +3,7 @@ import CallLogs from "@/components/dashboard/CallLogs";
 import CallRecording from "@/components/dashboard/CallRecording";
 import Sidebar from "@/components/dashboard/Sidebar";
 import { Route, Routes } from "react-router-dom";
+import NotFound from "./NotFound";
 
 export default function Dashboard() {
     return (
@@ -15,6 +16,7 @@ export default function Dashboard() {
                 <Route path='/' element={<Agents />} />
                 <Route path='/call-logs' element={<CallLogs />} />
                 <Route path='/call-recordings' element={<CallRecording />} />
+                <Route path='*' element={<NotFound />} />
             </Routes>
 
         </div >

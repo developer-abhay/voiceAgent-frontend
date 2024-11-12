@@ -2,6 +2,7 @@ import { Bot, Phone, History, CreditCard, Key, Webhook, HelpCircle } from "lucid
 import { Button } from "@/components/ui/button"
 import { Link, NavLink } from "react-router-dom"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { ModeToggle } from "../darkmode/mode-toggle"
 
 const menu = {
     menu1: [
@@ -11,24 +12,24 @@ const menu = {
             icon: <Bot className="h-4 w-4" />
         },
         {
-            route: '#',
+            route: 'phone-numbers',
             title: "Phone Numbers",
             icon: <Phone className="h-4 w-4" />
         }
     ],
     menu2: [
         {
-            route: '#',
+            route: 'billing',
             title: "Billing",
             icon: <CreditCard className="h-4 w-4" />
         },
         {
-            route: '#',
+            route: 'api-keys',
             title: "Api Keys",
             icon: <Key className="h-4 w-4" />
         },
         {
-            route: '#',
+            route: 'webhooks',
             title: "Webhooks",
             icon: <Webhook className="h-4 w-4" />
         },
@@ -40,11 +41,12 @@ const Sidebar = () => {
     return (
         <div className="hidden border-r bg-muted/40 lg:block">
             <div className="flex h-full max-h-screen flex-col gap-2">
-                <div className="flex h-[60px] items-center border-b px-6">
-                    <Link className="flex items-center gap-2 font-semibold" to="#">
+                <div className="flex justify-between h-[60px] items-center border-b px-6">
+                    <Link className="flex items-center gap-2 font-semibold" to="">
                         <Bot className="h-6 w-6" />
                         <span>HelloGenAI</span>
                     </Link>
+                    <ModeToggle />
                 </div>
                 <div className="flex-1 overflow-auto py-2">
                     <nav className="grid items-start px-4 text-sm font-medium">
@@ -68,20 +70,26 @@ const Sidebar = () => {
                                     </div>
                                 </AccordionTrigger>
                                 <AccordionContent>
-                                    <Link
-                                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-accent-foreground"
+                                    <NavLink
                                         to="call-logs"
+                                        className={({ isActive }) =>
+                                            `flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isActive ? 'bg-accent text-accent-foreground transition-all hover:text-accent-foreground' : 'text-muted-foreground transition-all hover:text-accent-foreground'
+                                            }`
+                                        }
                                     >
                                         <History className="h-4 w-4" />
                                         Call Logs
-                                    </Link>
-                                    <Link
-                                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-accent-foreground"
+                                    </NavLink>
+                                    <NavLink
                                         to="call-recordings"
+                                        className={({ isActive }) =>
+                                            `flex items-center gap-3 rounded-lg px-3 py-2 transition-all ${isActive ? 'bg-accent text-accent-foreground transition-all hover:text-accent-foreground' : 'text-muted-foreground transition-all hover:text-accent-foreground'
+                                            }`
+                                        }
                                     >
                                         <History className="h-4 w-4" />
                                         Call Recordings
-                                    </Link>
+                                    </NavLink>
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>

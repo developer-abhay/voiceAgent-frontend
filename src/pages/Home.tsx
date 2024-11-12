@@ -4,13 +4,14 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import DemoCall from "@/components/Home/DemoCall"
 import Footer from "@/components/Home/Footer"
+import { ModeToggle } from "@/components/darkmode/mode-toggle"
 
 export default function Home() {
     return (
         <div className="flex min-h-screen flex-col">
             {/* Navigation */}
             <header className="px-4 lg:px-6 h-16 flex items-center justify-between border-b">
-                <Link className="flex items-center gap-2 font-semibold" to="/">
+                <Link to="/" className="flex items-center gap-2 font-semibold" >
                     <Bot className="h-6 w-6" />
                     <span>HelloGenAI</span>
                 </Link>
@@ -28,12 +29,14 @@ export default function Home() {
                         Contact
                     </Link>
                 </nav>
+
                 <div className="flex gap-4">
+                    <ModeToggle />
                     <Link to="/login">
                         <Button variant="ghost">Sign In</Button>
                     </Link>
-                    <Link to="/signup">
-                        <Button>Sign Up NOW</Button>
+                    <Link to="/register">
+                        <Button>Sign Up</Button>
                     </Link>
                 </div>
             </header>
