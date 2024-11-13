@@ -7,3 +7,15 @@ export interface Agent {
     editedBy: string
     editedAt: string
 }
+
+export interface User {
+    name: string;
+    email: string;
+    password: string
+}
+
+export interface AuthContextType {
+    user: User | null;
+    login: (User: User) => void;
+    logout: () => void;
+}

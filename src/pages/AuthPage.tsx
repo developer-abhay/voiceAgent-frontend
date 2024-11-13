@@ -5,21 +5,28 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { useLocation, useNavigate } from "react-router-dom"
+import useAuth from "@/hooks/useAuth"
+import { LoadingSpinner } from "@/components/loader"
 
 export default function AuthPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const [isLogin, setIsLogin] = useState(location.pathname === "/login")
 
-  // const [isLogin, setIsLogin] = useState(true)
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { handleLogin, handleRegister, loading, error } = useAuth()
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically handle the login or registration logic
-    console.log(isLogin ? "Logging in" : "Registering", { name, email, password })
+
+    if (isLogin) {
+      await handleLogin(email, password)
+    } else {
+      await handleRegister({ name, email, password })
+    }
   }
 
   const toggleAuthMode = () => {
@@ -86,8 +93,11 @@ export default function AuthPage() {
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
             <Button className="w-full" type="submit">
-              {isLogin ? "Login" : "Register"}
+              {/* {isLogin ? "Login" : "Register"} */}
+
+              {loading ? <LoadingSpinner /> : (isLogin ? "Login" : "Register")}
             </Button>
+            {error && <p className="text-red-600 text-sm">{error}</p>}
             <div className="text-center text-sm">
               {isLogin ? "Don't have an account? " : "Already have an account? "}
               <Button
