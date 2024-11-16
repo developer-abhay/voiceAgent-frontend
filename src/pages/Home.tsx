@@ -1,49 +1,22 @@
-import { Bot } from "lucide-react"
-import { Link } from "react-router-dom"
+import { ArrowRight, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import DemoCall from "@/components/Home/DemoCall"
 import Footer from "@/components/Home/Footer"
-import { ModeToggle } from "@/components/darkmode/mode-toggle"
+import Header from "@/components/layout/Header"
+import { Card, CardContent } from "@/components/ui/card"
+import Pricing from "@/components/Home/Pricing"
+import FAQs from "@/components/Home/FAQs"
 
 export default function Home() {
     return (
         <div className="flex min-h-screen flex-col">
             {/* Navigation */}
-            <header className="px-4 lg:px-6 h-16 flex items-center justify-between border-b">
-                <Link to="/" className="flex items-center gap-2 font-semibold" >
-                    <Bot className="h-6 w-6" />
-                    <span>HelloGenAI</span>
-                </Link>
-                <nav className="hidden md:flex gap-6">
-                    <Link className="text-sm font-medium hover:underline underline-offset-4" to="#">
-                        Blog
-                    </Link>
-                    <Link className="text-sm font-medium hover:underline underline-offset-4" to="#">
-                        Documentation
-                    </Link>
-                    <Link className="text-sm font-medium hover:underline underline-offset-4" to="#">
-                        Pricing
-                    </Link>
-                    <Link className="text-sm font-medium hover:underline underline-offset-4" to="#">
-                        Contact
-                    </Link>
-                </nav>
-
-                <div className="flex gap-4">
-                    <ModeToggle />
-                    <Link to="/login">
-                        <Button variant="ghost">Sign In</Button>
-                    </Link>
-                    <Link to="/register">
-                        <Button>Sign Up</Button>
-                    </Link>
-                </div>
-            </header>
+            <Header />
 
             <main className="flex-1">
                 {/* Hero Section */}
-                <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-b from-background to-muted flex flex-col gap-40 justify-center items-center">
+                <section className="h-[calc(100vh-4rem)] w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-b from-background to-muted flex flex-col gap-40 justify-center items-center">
                     <div className="container px-4 md:px-6">
                         <div className="flex flex-col items-center space-y-4 text-center">
                             <div className="space-y-2">
@@ -71,31 +44,24 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-
-                    {/* Get a Demo Call */}
-                    <DemoCall />
                 </section>
 
 
 
+                {/* Get a Demo Call */}
+                <DemoCall />
+
                 {/* Trusted By Section */}
                 <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/50 flex justify-center">
-                    <div className="container px-4 md:px-6">
-                        <div className="flex flex-col items-center space-y-4 text-center">
-                            <h2 className="text-xl font-medium text-muted-foreground">Trusted by innovative companies</h2>
-                            <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
-                                {[1, 2, 3, 4, 5, 6].map((i) => (
-                                    <div key={i} className="flex items-center justify-center">
-                                        <img
-                                            src="/placeholder.svg"
-                                            alt={`Company logo ${i}`}
-                                            className="h-12 w-auto grayscale transition-all hover:grayscale-0"
-                                            width={200}
-                                            height={48}
-                                        />
-                                    </div>
-                                ))}
-                            </div>
+
+                    <div className="container mx-auto px-4">
+                        <p className="text-center text-sm text-gray-500 mb-4">TRUSTED BY</p>
+                        <div className="flex flex-wrap justify-center items-center gap-8">
+                            {['pwc', 'twilio', 'aircall', 'zendesk', 'spare', 'regal'].map((logo) => (
+                                <div className="w-40 h-10 bg-gray-200"></div>
+                                // <img key={logo} src={`/placeholder.svg?height=30&width=100`} alt={logo} width={100} height={30} className="opacity-50" />
+                            ))}
+
                         </div>
                     </div>
                 </section>
@@ -127,6 +93,70 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+
+
+                {/* Testimonials */}
+                <section className="bg-gray-100 py-12">
+                    <div className="container mx-auto px-4">
+                        <h2 className="text-3xl font-bold mb-8 text-center">What our customers say about us...</h2>
+                        <Card className="max-w-2xl mx-auto">
+                            <CardContent className="p-6">
+                                <p className="text-lg mb-4">"The previous IVR handled about 15% of calls. After releasing the AI Voice Agent, it is now handling over 50% of calls."</p>
+                                <div className="flex items-center">
+                                    <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                                    <div>
+                                        <p className="font-semibold">Josh Andrews</p>
+                                        <p className="text-sm text-gray-600">CTO at Spare</p>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </section>
+
+                {/* Pricing */}
+                <Pricing />
+
+                {/* Security */}
+                <section className="container mx-auto px-4 py-12 text-center">
+                    <h2 className="text-3xl font-bold mb-8">Scale with Enterprise-grade Security</h2>
+                    <div className="flex justify-center space-x-4 mb-8">
+                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                            <CheckCircle2 className="text-blue-600 w-8 h-8" />
+                        </div>
+                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                            <CheckCircle2 className="text-blue-600 w-8 h-8" />
+                        </div>
+                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                            <CheckCircle2 className="text-blue-600 w-8 h-8" />
+                        </div>
+                    </div>
+                    <Button size="lg">Get Free Credits <ArrowRight className="ml-2" /></Button>
+                </section>
+
+                {/* News */}
+                <section className="container mx-auto px-4 py-12">
+                    <h2 className="text-3xl font-bold mb-8">News</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {[
+                            { title: "$4.6M SEED", description: "Resell AI Seed Round Announcement" },
+                            { title: "TC+ Feature", description: "Resell AI in companies build voice agents to answer phone calls" },
+                            { title: "Tech Crunch", description: "Call Centers Embrace AI for Faster Service, Lower Costs" },
+                            { title: "VentureBeat", description: "Resell AI Launches With Reactive Conversational AI Technology" }
+                        ].map((news, index) => (
+                            <Card key={index}>
+                                <CardContent className="p-4">
+                                    <h3 className="font-semibold mb-2">{news.title}</h3>
+                                    <p className="text-sm text-gray-600">{news.description}</p>
+                                </CardContent>
+                            </Card>
+                        ))}
+                    </div>
+                </section>
+
+                {/* FAQ */}
+                <FAQs />
+
             </main>
 
             {/* Footer */}

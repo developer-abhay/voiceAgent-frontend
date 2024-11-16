@@ -10,7 +10,8 @@ export default function DemoCall() {
             <h1 className="mb-12 text-center text-4xl font-bold">Live Demo for all Use Cases</h1>
             <div className="flex gap-10 justify-between">
                 <div className="flex rounded-xl overflow-hidden w-[60%]">
-                    <div className="space-y-8 bg-gray-950 p-8 text-white w-[45%]">
+                    {/* <div className="space-y-8 bg-gray-950 p-8 text-white w-[45%]"> */}
+                    <div className="space-y-8 bg-white p-8 text-gray-950 w-[45%] border-2 border-r-0 border-gray-300 rounded-l-xl">
                         <div className="space-y-2">
                             <h2 className="text-2xl">Receive a live call from our agent</h2>
                         </div>
@@ -21,7 +22,7 @@ export default function DemoCall() {
                                 <Input
                                     id="phone"
                                     placeholder="123-456-7890"
-                                    className="border-gray-800 bg-gray-900 text-white"
+                                    className="border-gray-800 "
                                 />
                             </div>
 
@@ -30,7 +31,8 @@ export default function DemoCall() {
                                 <Input
                                     id="name"
                                     placeholder="John"
-                                    className="border-gray-800 bg-gray-900 text-white"
+                                    // className="border-gray-800 bg-gray-900 text-white"
+                                    className="border-gray-800 "
                                 />
                             </div>
 
@@ -40,11 +42,11 @@ export default function DemoCall() {
                                     id="email"
                                     type="email"
                                     placeholder="john@company.com"
-                                    className="border-gray-800 bg-gray-900 text-white"
+                                    className="border-gray-800 "
                                 />
                             </div>
 
-                            <Button className="w-fit mt-5 bg-white text-gray-950 hover:bg-gray-100">
+                            <Button className="w-fit mt-5 bg-gray-950">
                                 GET A CALL
                             </Button>
                         </div>

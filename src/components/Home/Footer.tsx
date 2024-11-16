@@ -53,7 +53,7 @@ export default function Footer() {
                     <div className="lg:col-span-1">
                         <div className="mb-6 flex items-center gap-2">
                             <div className="rounded-lg bg-white p-2">
-                                <img src="/public/icon.svg" alt="" />
+                                <img src="/icon.svg" alt="" />
                             </div>
                             <span className="text-xl font-bold text-white">HelloGenAI</span>
                         </div>

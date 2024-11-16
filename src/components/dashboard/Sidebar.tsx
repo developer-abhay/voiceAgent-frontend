@@ -1,4 +1,4 @@
-import { Bot, Phone, History, CreditCard, Key, Webhook, HelpCircle } from "lucide-react"
+import { Bot, Phone, History, CreditCard, Key, Webhook, HelpCircle, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link, NavLink } from "react-router-dom"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -130,7 +130,19 @@ const Sidebar = () => {
                             Add Payment
                         </Button>
                     </div>
+
                 </div>
+                <div className="px-4">
+                    <Button
+                        variant="outline"
+                        className="w-full justify-start"
+                        onClick={() => console.log('Logout clicked')}
+                    >
+                        <LogOut className="mr-2 h-4 w-4" />
+                        Logout
+                    </Button>
+                </div>
+
                 <div className="border-t p-4">
                     <Link className="flex items-center gap-2 text-sm" to="#">
                         <HelpCircle className="h-4 w-4" />
