@@ -17,20 +17,25 @@ export default function AuthPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
-  const { handleLogin, handleRegister, loading, error } = useAuth()
+  const { handleLogin, handleRegister, loading } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
+    let success;
     if (isLogin) {
-      await handleLogin(email, password)
+      success = await handleLogin(email, password)
     } else {
-      await handleRegister({ name, email, password })
+      success = await handleRegister({ name, email, password })
+    }
+    if (success) {
+      navigate(`${isLogin ? '/dashboard' : '/login'}`)
+      setName("")
+      setEmail("")
+      setPassword("")
     }
   }
 
   const toggleAuthMode = () => {
-    // Toggle between login and register views
     if (isLogin) {
       navigate("/register")
     } else {
@@ -39,8 +44,7 @@ export default function AuthPage() {
   }
 
   useEffect(() => {
-    // Update isLogin state based on URL
-    setIsLogin(location.pathname === "/login")
+    setIsLogin(location.pathname == '/login')
   }, [location.pathname])
 
   return (
@@ -93,16 +97,12 @@ export default function AuthPage() {
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
             <Button className="w-full" type="submit">
-              {/* {isLogin ? "Login" : "Register"} */}
-
               {loading ? <LoadingSpinner /> : (isLogin ? "Login" : "Register")}
             </Button>
-            {error && <p className="text-red-600 text-sm">{error}</p>}
             <div className="text-center text-sm">
               {isLogin ? "Don't have an account? " : "Already have an account? "}
               <Button
                 className="p-0 text-primary underline"
-                // onClick={() => setIsLogin(!isLogin)}
                 onClick={toggleAuthMode}
                 variant="link"
               >

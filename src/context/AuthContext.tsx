@@ -8,12 +8,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = (userData: User) => {
     setUser(userData);
-    localStorage.setItem("token", JSON.stringify(userData));
+    // localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("token");
+    // localStorage.removeItem("user");
   };
 
   return (

@@ -3,6 +3,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { User } from "@/interfaces/Dashboard";
 import { AxiosError } from "axios";
 import { useState } from "react"
+import { toast } from "./use-toast";
 
 const useAuth = () => {
     const [loading, setLoading] = useState<Boolean>(false);
@@ -14,8 +15,10 @@ const useAuth = () => {
         setError(null);
         try {
             const data = await UserAPI.signin(email, password)
-            login(data.data)
-            return data.data
+            if (data.status == 200) {
+                login(data.data.user)
+            }
+            return data.status
         } catch (err: unknown) {
             let error;
             if (err instanceof AxiosError) {
@@ -23,6 +26,10 @@ const useAuth = () => {
             } else {
                 error = "Login failed";
             }
+            toast({
+                description: error,
+                variant: 'destructive',
+            })
             setError(error);
         } finally {
             setLoading(false);
@@ -33,7 +40,11 @@ const useAuth = () => {
         setError(null);
         try {
             const data = await UserAPI.signup(name, email, password)
-            return data;
+            toast({
+                description: 'Registration Successful',
+                className: 'bg-green-500 text-white',
+            })
+            return data.status;
         } catch (err: unknown) {
             let error;
             if (err instanceof AxiosError) {
@@ -41,6 +52,10 @@ const useAuth = () => {
             } else {
                 error = "Registeration failed";
             }
+            toast({
+                description: error,
+                variant: 'destructive',
+            })
             setError(error);
         } finally {
             setLoading(false);

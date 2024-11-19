@@ -11,7 +11,7 @@ const UserAPI = {
                 password
             }
         });
-        return response.data
+        return response;
     },
     signin: async (email: string, password: string) => {
         const response = await api.request({
@@ -22,8 +22,15 @@ const UserAPI = {
                 password
             }
         });
-        return response.data
-    }
+        return response
+    },
+    verifyMe: async () => {
+        const response = await api.request({
+            url: '/verify-token',
+            method: 'GET',
+        });
+        return response
+    },
 }
 
 export default UserAPI
