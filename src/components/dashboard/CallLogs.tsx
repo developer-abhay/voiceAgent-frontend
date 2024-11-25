@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CalendarDays, Download, Search, Settings } from "lucide-react"
 import { format } from "date-fns"
 import { Button } from "@/components/ui/button"
@@ -30,52 +30,23 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import useCallDetails from "@/hooks/useCallDetails"
+import { CallDetails } from "@/interfaces/Dashboard"
 
-interface CallLog {
-    id: string
-    date: string
-    status: "Completed" | "No Answer"
-    direction: string
-    from: string
-    to: string
-    callType: string
-    duration: string
-}
 
 export default function CallLogs() {
     const [date, setDate] = useState<Date>()
-    const [logs] = useState<CallLog[]>([
-        {
-            id: "CA123456789",
-            date: "2024-01-11 12:26:51",
-            status: "Completed",
-            direction: "Outgoing API",
-            from: "+12407021761",
-            to: "+917042491465",
-            callType: "Phone",
-            duration: "21 sec"
-        },
-        {
-            id: "CA987654321",
-            date: "2024-01-10 10:21:02",
-            status: "No Answer",
-            direction: "Outgoing API",
-            from: "+12407021761",
-            to: "+917709393222",
-            callType: "Phone",
-            duration: "0 sec"
-        },
-        {
-            id: "CA456789123",
-            date: "2024-01-10 10:21:01",
-            status: "Completed",
-            direction: "Outgoing API",
-            from: "+12407021761",
-            to: "+919110401851",
-            callType: "Phone",
-            duration: "4 min 0 sec"
-        }
-    ])
+    const { callDetails, fetchCallDetails, loading } = useCallDetails()
+    const [filteredCalls, setFilteredCalls] = useState<CallDetails[]>()
+
+    useEffect(() => {
+        fetchCallDetails('college');
+
+    }, [])
+
+    useEffect(() => {
+
+    }, [callDetails])
 
     return (
         <div className="flex flex-col h-full">
@@ -163,37 +134,39 @@ export default function CallLogs() {
                                     <TableRow>
                                         <TableHead className="w-[250px]">Call SID and Date</TableHead>
                                         <TableHead>Status</TableHead>
-                                        <TableHead>Direction</TableHead>
+                                        {/* <TableHead>Direction</TableHead> */}
                                         <TableHead>From</TableHead>
                                         <TableHead>To</TableHead>
                                         <TableHead>Duration</TableHead>
 
                                     </TableRow>
                                 </TableHeader>
-                                <TableBody>
-                                    {logs.map((log) => (
-                                        <TableRow key={log.id}>
-                                            <TableCell>
-                                                <div className="space-y-0.5">
-                                                    <div className="text-sm font-medium text-primary">{log.id}</div>
-                                                    <div className="text-xs text-muted-foreground">{log.date}</div>
-                                                </div>
-                                            </TableCell>
-                                            <TableCell>
-                                                <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${log.status === "Completed" ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"
-                                                    }`}>
-                                                    {log.status}
-                                                </span>
-                                            </TableCell>
-                                            <TableCell>{log.direction}</TableCell>
-                                            <TableCell>{log.from}</TableCell>
-                                            <TableCell>{log.to}</TableCell>
+                                {loading ?
+                                    (<div className="w-full h-[200px] bg-slate-300 flex justify-center items-center">Loading....</div>) :
+                                    (<TableBody>
+                                        {callDetails?.map((call) => (
+                                            <TableRow key={call.callSid}>
+                                                <TableCell>
+                                                    <div className="space-y-0.5">
+                                                        <div className="text-sm font-medium text-primary">{call.callSid}</div>
+                                                        <div className="text-xs text-muted-foreground">{call.initiatedTime}</div>
+                                                    </div>
+                                                </TableCell>
+                                                <TableCell>
+                                                    <span className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${call.callStatus === "completed" ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"
+                                                        }`}>
+                                                        {call.callStatus}
+                                                    </span>
+                                                </TableCell>
+                                                {/* <TableCell>{call.direction}</TableCell> */}
+                                                <TableCell>{call.fromPhoneNumber}</TableCell>
+                                                <TableCell>{call.toPhoneNumber}</TableCell>
 
-                                            <TableCell>{log.duration}</TableCell>
+                                                <TableCell>{call.callDuration ? call.callDuration : '0'}</TableCell>
 
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>)}
                             </Table>
                         </div>
                     </div>

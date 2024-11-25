@@ -18,4 +18,20 @@ export interface AuthContextType {
     user: User | null;
     login: (User: User) => void;
     logout: () => void;
+    callDetails: CallDetails[];
+    updateCallDetails: (callDetails: CallDetails[]) => void
+}
+
+export interface CallDetails {
+    clientId: string;
+    callSid: string;
+    callStatus: 'no-answer' | 'completed' | 'busy';
+    toPhoneNumber: 'string',
+    fromPhoneNumber: 'string',
+    customerDetails?: {};
+    recordingLink?: string;
+    recordingSid?: string;
+    recordingId: string;
+    callDuration: string,
+    initiatedTime: string
 }

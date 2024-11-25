@@ -104,7 +104,7 @@ export const pricingTiers = [
             //     "Support Automated SMS Sending",
             //     "Automated booking and scheduling",
             //     "Automated SMS Sending"
-            // ],
+            // ],   
             // aiAudio: [
             //     "Superior Noise Reduction in Calls",
             //     "Customer Sentiment Analysis",
