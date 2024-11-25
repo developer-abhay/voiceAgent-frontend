@@ -57,7 +57,7 @@ export default function Home() {
                     <div className="container mx-auto px-4">
                         <p className="text-center text-sm text-gray-500 mb-4">TRUSTED BY</p>
                         <div className="flex flex-wrap justify-center items-center gap-8">
-                            {['pwc', 'twilio', 'aircall', 'zendesk', 'spare', 'regal'].map((logo, index) => (
+                            {['pwc', 'twilio', 'aircall', 'zendesk', 'spare', 'regal'].map((_logo, index) => (
                                 <div key={index} className="w-40 h-10 bg-gray-200"></div>
                                 // <img key={logo} src={`/placeholder.svg?height=30&width=100`} alt={logo} width={100} height={30} className="opacity-50" />
                             ))}

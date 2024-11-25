@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import AuthPage from "@/pages/AuthPage";
 import Home from "@/pages/Home";
-import Home2 from "@/pages/Home2";
 import NotFound from "@/pages/NotFound";
 import Protected from "./protected";
 import { isAuthenticated } from "./helper";
@@ -14,7 +13,6 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/'>
         {/* Public Routes */}
         <Route index element={<Home />} />
-        <Route path='home' element={<Home2 />} />
         <Route path='login' element={<AuthPage />} loader={async () => await isAuthenticated()} />
         <Route path='register' element={<AuthPage />} loader={async () => await isAuthenticated()} />
         {/* Protected Routes */}
