@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Link, NavLink } from "react-router-dom"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { ModeToggle } from "../darkmode/mode-toggle"
+import { useAuthContext } from "@/context/AuthContext"
 
 const menu = {
     menu1: [
@@ -38,6 +39,7 @@ const menu = {
 
 
 const Sidebar = () => {
+    const { logout } = useAuthContext()
     return (
         <div className="hidden border-r bg-muted/40 lg:block">
             <div className="flex h-full max-h-screen flex-col gap-2">
@@ -136,7 +138,7 @@ const Sidebar = () => {
                     <Button
                         variant="outline"
                         className="w-full justify-start"
-                        onClick={() => console.log('Logout clicked')}
+                        onClick={() => logout()}
                     >
                         <LogOut className="mr-2 h-4 w-4" />
                         Logout

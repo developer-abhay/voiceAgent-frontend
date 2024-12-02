@@ -7,6 +7,8 @@ import Header from "@/components/layout/Header"
 import { Card, CardContent } from "@/components/ui/card"
 import Pricing from "@/components/Home/Pricing"
 import FAQs from "@/components/Home/FAQs"
+import { WavyBackground } from "@/components/ui/wavy-background"
+import { companyLogos } from "@/data/data"
 
 export default function Home() {
     return (
@@ -16,25 +18,26 @@ export default function Home() {
 
             <main className="flex-1">
                 {/* Hero Section */}
-                <section className="h-[calc(100vh-4rem)] w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-b from-background to-muted flex flex-col gap-40 justify-center items-center">
-                    <div className="container px-4 md:px-6">
-                        <div className="flex flex-col items-center space-y-4 text-center">
-                            <div className="space-y-2">
+                <section className="h-[calc(65vh-4rem)] w-full py-6 md:py-12 lg:py-18 xl:py-24">
+                    <div className="flex flex-col space-y-4 text-center  overflow-hidden">
+                        <WavyBackground className="mx-auto" backgroundFill="white">
+                            <div className="space-y-2 ">
                                 <Badge variant="secondary" className="bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 transition-colors">
                                     NEW
                                 </Badge>
                                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                                    Automate calls with AI phone agents that{" "}
+                                    Supercharge your <br />
                                     <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                                        drive sales
+                                        {" "}Call Operations{" "}
                                     </span>
+                                    with AI voice agents
                                 </h1>
                                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
                                     Create artificial intelligence powered, human-like AI voice agents ready to handle your phone calls 24/7,
                                     in 60 seconds or less.
                                 </p>
                             </div>
-                            <div className="space-x-4">
+                            <div className="space-x-4 mt-5">
                                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-violet-600">
                                     Try for free
                                 </Button>
@@ -42,29 +45,27 @@ export default function Home() {
                                     Contact Sales
                                 </Button>
                             </div>
-                        </div>
+                        </WavyBackground>
                     </div>
                 </section>
 
-
-
-                {/* Get a Demo Call */}
-                <DemoCall />
-
                 {/* Trusted By Section */}
-                <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/50 flex justify-center">
-
-                    <div className="container mx-auto px-4">
-                        <p className="text-center text-sm text-gray-500 mb-4">TRUSTED BY</p>
-                        <div className="flex flex-wrap justify-center items-center gap-8">
-                            {['pwc', 'twilio', 'aircall', 'zendesk', 'spare', 'regal'].map((_logo, index) => (
-                                <div key={index} className="w-40 h-10 bg-gray-200"></div>
-                                // <img key={logo} src={`/placeholder.svg?height=30&width=100`} alt={logo} width={100} height={30} className="opacity-50" />
+                <section className="w-full h-[35vh] py-4 md:py-8 lg:py-12 flex justify-center">
+                    <div className="container mx-auto px-4 max-w-[70%]">
+                        <p className="text-center text-lg text-gray-500 mb-8">TRUSTED BY</p>
+                        <div className="grid grid-cols-6 place-content-center gap-5 flex-wrap justify-center items-center">
+                            {companyLogos.map((logo, index) => (
+                                <img key={index} src={logo} alt={'Company-logo'} className="opacity-70 h-6 " />
                             ))}
 
                         </div>
                     </div>
                 </section>
+
+                {/* Get a Demo Call */}
+                <DemoCall />
+
+
 
                 {/* Features Section */}
                 <section className="w-full py-12 md:py-24 lg:py-32 flex justify-center">

@@ -1,3 +1,24 @@
+import CompanyLogo1 from '../../public/assets/company1.svg'
+import CompanyLogo2 from '../../public/assets/company2.svg'
+import CompanyLogo3 from '../../public/assets/company3.svg'
+import CompanyLogo4 from '../../public/assets/company4.svg'
+import CompanyLogo5 from '../../public/assets/company5.svg'
+import CompanyLogo6 from '../../public/assets/company6.svg'
+
+export const companyLogos = [
+    CompanyLogo2,
+    CompanyLogo3,
+    CompanyLogo4,
+    CompanyLogo5,
+    CompanyLogo1,
+    CompanyLogo6,
+    CompanyLogo1,
+    CompanyLogo2,
+    CompanyLogo5,
+    CompanyLogo6,
+    CompanyLogo3,
+    CompanyLogo4,
+]
 export const pricingTiers = [
     {
         name: "Starter",

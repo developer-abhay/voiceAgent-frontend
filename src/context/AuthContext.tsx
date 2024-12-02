@@ -8,11 +8,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = (userData: User) => {
     setUser(userData);
+    console.log(userData)
     // localStorage.setItem("user", JSON.stringify(userData));
   };
 
   const logout = () => {
     setUser(null);
+    console.log('logged out ')
     // localStorage.removeItem("user");
   };
 
