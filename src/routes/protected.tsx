@@ -1,4 +1,5 @@
 import UserAPI from "@/api/UserAPI";
+import { LoadingSpinner } from "@/components/loader";
 import { useAuthContext } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
 import { Navigate, Outlet } from "react-router-dom";
@@ -32,10 +33,10 @@ const Protected = () => {
     }
   }, [user, login])
 
-  if (isLoading) return <div>Loading....</div>
+  if (isLoading) return <div className="h-screen flex"><LoadingSpinner className="m-auto w-20 h-20" /></div>
 
   // if not valid redirect to login page
-  return true ? <Outlet /> : <Navigate to="/login" />;
+  return user ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default Protected;
