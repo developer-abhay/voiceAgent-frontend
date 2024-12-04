@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ArrowLeft, Bot, BrainCircuit, Mic2, Phone, Shield, Webhook, Copy } from "lucide-react"
+import { ArrowLeft, Bot, BrainCircuit, Mic2, Phone, Shield, Webhook } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
