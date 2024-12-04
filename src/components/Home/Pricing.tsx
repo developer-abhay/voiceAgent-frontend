@@ -6,10 +6,10 @@ import { Button } from "../ui/button"
 
 const Pricing = () => {
     return (
-        <section className="container mx-auto px-4 py-24">
-            <div className="grid md:grid-cols-3 gap-8">
+        <section className="container mx-auto px-4 py-24 ">
+            <div className="grid md:grid-cols-3 gap-8 max-w-[80%] mx-auto">
                 {pricingTiers.map((tier) => (
-                    <Card key={tier.name} className={`bg-white border-2 border-gray-300 ${tier.highlight ? 'ring-2 ring-blue-600' : ''}`}>
+                    <Card key={tier.name} className={` border-2 border-gray-300 ${tier.highlight ? 'ring-2 ring-blue-600' : ''}`}>
                         <CardHeader>
                             <Badge className="w-fit mb-4 bg-blue-600 text-white">{tier.badge}</Badge>
                             <div className="mb-4">

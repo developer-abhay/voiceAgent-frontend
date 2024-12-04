@@ -1,9 +1,9 @@
-import CompanyLogo1 from '../../public/assets/company1.svg'
-import CompanyLogo2 from '../../public/assets/company2.svg'
-import CompanyLogo3 from '../../public/assets/company3.svg'
-import CompanyLogo4 from '../../public/assets/company4.svg'
-import CompanyLogo5 from '../../public/assets/company5.svg'
-import CompanyLogo6 from '../../public/assets/company6.svg'
+import CompanyLogo1 from '@/assets/company1.svg'
+import CompanyLogo2 from '@/assets/company2.svg'
+import CompanyLogo3 from '@/assets/company3.svg'
+import CompanyLogo4 from '@/assets/company4.svg'
+import CompanyLogo5 from '@/assets/company5.svg'
+import CompanyLogo6 from '@/assets/company6.svg'
 
 export const companyLogos = [
     CompanyLogo2,

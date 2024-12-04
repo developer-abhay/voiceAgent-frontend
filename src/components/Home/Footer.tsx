@@ -3,51 +3,8 @@ import { Link } from "react-router-dom"
 
 export default function Footer() {
     return (
-        //     <footer className="border-t py-10 flex justify-center">
-        //     <div className="container flex flex-col gap-4 py-10 md:flex-row md:py-8">
-        //         <div className="flex flex-1 flex-col gap-4">
-        //             <Link className="flex items-center gap-2 font-semibold" to="#">
-        //                 <Bot className="h-6 w-6" />
-        //                 <span>HelloGenAI</span>
-        //             </Link>
-        //             <p className="text-sm text-muted-foreground">
-        //                 Revolutionizing phone communications with AI-powered voice agents.
-        //             </p>
-        //         </div>
-        //         <div className="flex gap-8">
-        //             <div className="grid gap-4">
-        //                 <h3 className="text-sm font-medium">Company</h3>
-        //                 <nav className="grid gap-2">
-        //                     <Link className="text-sm hover:underline" to="#">
-        //                         About
-        //                     </Link>
-        //                     <Link className="text-sm hover:underline" to="#">
-        //                         Blog
-        //                     </Link>
-        //                     <Link className="text-sm hover:underline" to="#">
-        //                         Careers
-        //                     </Link>
-        //                 </nav>
-        //             </div>
-        //             <div className="grid gap-4">
-        //                 <h3 className="text-sm font-medium">Connect</h3>
-        //                 <nav className="grid gap-2">
-        //                     <Link className="text-sm hover:underline" to="#">
-        //                         Twitter
-        //                     </Link>
-        //                     <Link className="text-sm hover:underline" to="#">
-        //                         LinkedIn
-        //                     </Link>
-        //                     <Link className="text-sm hover:underline" to="#">
-        //                         GitHub
-        //                     </Link>
-        //                 </nav>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </footer>
-        <footer className="relative mt-20 bg-gray-950 text-gray-400">
-
+        // <footer className="relative mt-20 bg-gradient-to-r from-blue-600 to-violet-600 text-gray-400">
+        <footer className="relative bg-[#111827] text-gray-400">
             <div className="container mx-auto px-6 py-12">
                 <div className="grid gap-8 lg:grid-cols-5">
                     <div className="lg:col-span-1">

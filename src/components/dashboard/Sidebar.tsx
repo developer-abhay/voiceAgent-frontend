@@ -13,8 +13,8 @@ const menu = {
             icon: <Bot className="h-4 w-4" />
         },
         {
-            route: 'phone-numbers',
-            title: "Phone Numbers",
+            route: 'make-calls',
+            title: "Make Calls",
             icon: <Phone className="h-4 w-4" />
         }
     ],

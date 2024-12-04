@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Link } from "react-router-dom"
 
 export default function CreateAgent() {
@@ -212,58 +211,41 @@ export default function CreateAgent() {
                         <div className="p-4">
                             <div className="flex items-center justify-between mb-4">
                                 <h2 className="text-lg font-semibold">Test your agent</h2>
-                                <Button variant="outline" size="sm">
-                                    <Copy className="h-4 w-4 mr-2" />
-                                    New test template
-                                </Button>
                             </div>
-                            <Tabs defaultValue="llm" className="w-full">
-                                <TabsList className="grid w-full grid-cols-2">
-                                    <TabsTrigger value="audio">Test Audio</TabsTrigger>
-                                    <TabsTrigger value="llm">Test LLM</TabsTrigger>
-                                </TabsList>
-                                <TabsContent value="audio" className="mt-4">
-                                    <div className="flex justify-center items-center h-[300px]">
-                                        <Button variant="outline" size="lg">
-                                            <Mic2 className="h-4 w-4 mr-2" />
-                                            Start Recording
-                                        </Button>
-                                    </div>
-                                </TabsContent>
-                                <TabsContent value="llm" className="mt-4">
-                                    <div className="space-y-4">
-                                        <div className="h-[300px] overflow-y-auto space-y-4 p-4 rounded-lg border bg-muted">
-                                            {messages.map((message, index) => (
+                            <div className="mt-4">
+                                <div className="space-y-4">
+                                    <div className="h-[300px] overflow-y-auto space-y-4 p-4 rounded-lg border bg-muted">
+                                        {messages.map((message, index) => (
+                                            <div
+                                                key={index}
+                                                className={`flex ${message.role === 'assistant' ? 'justify-start' : 'justify-end'}`}
+                                            >
                                                 <div
-                                                    key={index}
-                                                    className={`flex ${message.role === 'assistant' ? 'justify-start' : 'justify-end'}`}
+                                                    className={`rounded-lg px-4 py-2 max-w-[80%] ${message.role === 'assistant'
+                                                        ? 'bg-primary text-primary-foreground'
+                                                        : 'bg-muted-foreground/10'
+                                                        }`}
                                                 >
-                                                    <div
-                                                        className={`rounded-lg px-4 py-2 max-w-[80%] ${message.role === 'assistant'
-                                                            ? 'bg-primary text-primary-foreground'
-                                                            : 'bg-muted-foreground/10'
-                                                            }`}
-                                                    >
-                                                        {message.content}
-                                                    </div>
+                                                    {message.content}
                                                 </div>
-                                            ))}
-                                        </div>
-                                        <form onSubmit={handleSendMessage} className="flex gap-2">
-                                            <Input
-                                                placeholder="Type your message here..."
-                                                value={testMessage}
-                                                onChange={(e) => setTestMessage(e.target.value)}
-                                            />
-                                            <Button type="submit">Send</Button>
-                                        </form>
+                                            </div>
+                                        ))}
                                     </div>
-                                </TabsContent>
-                            </Tabs>
+                                    <form onSubmit={handleSendMessage} className="flex gap-2">
+                                        <Input
+                                            placeholder="Type your message here..."
+                                            value={testMessage}
+                                            onChange={(e) => setTestMessage(e.target.value)}
+                                        />
+                                        <Button type="submit">Send</Button>
+                                    </form>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
