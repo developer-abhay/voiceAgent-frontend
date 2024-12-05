@@ -1,9 +1,7 @@
-'use client'
-
 import { useState, useCallback } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Cloud, Upload, Download } from 'lucide-react'
+import { Download, CloudUpload } from 'lucide-react'
 import {
     Select,
     SelectContent,
@@ -14,7 +12,6 @@ import {
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -34,7 +31,7 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>
 
-export default function MakeCallsForm({ onClose }: { onClose: () => void }) {
+export default function MakeCalls() {
     const [isDragging, setIsDragging] = useState(false);
     const [csvFileName, setCsvFileName] = useState<string | null>(null);
 
@@ -50,7 +47,7 @@ export default function MakeCallsForm({ onClose }: { onClose: () => void }) {
 
     const onSubmit = (values: FormValues) => {
         console.log(values)
-        onClose()
+        // onClose()
     }
 
     const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -83,8 +80,7 @@ export default function MakeCallsForm({ onClose }: { onClose: () => void }) {
     }
 
     const handleDownloadTemplate = () => {
-        // Create a sample CSV content
-        const csvContent = "Name,Phone Number,Email\nJohn Doe,+1234567890,john@example.com\nJane Smith,+0987654321,jane@example.com";
+        const csvContent = "Phone Number,Name,Additonal Column (optional)\n+917042491465,Abhay,example@gmail,\n+0987654321,Jane Smith,jane@example.com";
 
         // Create a Blob with the CSV content
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -103,144 +99,146 @@ export default function MakeCallsForm({ onClose }: { onClose: () => void }) {
     }
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <div className="flex space-x-4">
-                    <FormField
-                        control={form.control}
-                        name="agent"
-                        render={({ field }) => (
-                            <FormItem className="flex-1">
-                                <FormLabel>Select Agent</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <div className='flex justify-center items-center p-20'>
+            {/* Main Dashboard */}
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 border-2 p-8 rounded-xl w-full">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+                        <FormField
+                            control={form.control}
+                            name="agent"
+                            render={({ field }) => (
+                                <FormItem className="flex-1">
+                                    <FormLabel>Select Agent</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select an agent" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="agent1">Agent 1</SelectItem>
+                                            <SelectItem value="agent2">Agent 2</SelectItem>
+                                            <SelectItem value="agent3">Agent 3</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="retries"
+                            render={({ field }) => (
+                                <FormItem className="flex-1">
+                                    <FormLabel>Number of Retries</FormLabel>
                                     <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select an agent" />
-                                        </SelectTrigger>
+                                        <Input
+                                            type="number"
+                                            {...field}
+                                            onChange={(e) => field.onChange(e.target.value ? parseInt(e.target.value, 10) : '')}
+                                        />
                                     </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="agent1">Agent 1</SelectItem>
-                                        <SelectItem value="agent2">Agent 2</SelectItem>
-                                        <SelectItem value="agent3">Agent 3</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="retries"
-                        render={({ field }) => (
-                            <FormItem className="flex-1">
-                                <FormLabel>Number of Retries</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="number"
-                                        {...field}
-                                        onChange={(e) => field.onChange(e.target.value ? parseInt(e.target.value, 10) : '')}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <div className="flex space-x-4">
-                    <FormField
-                        control={form.control}
-                        name="rescheduleTime"
-                        render={({ field }) => (
-                            <FormItem className="flex-1">
-                                <FormLabel>Reschedule Time</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="number"
-                                        {...field}
-                                        onChange={(e) => field.onChange(e.target.value ? parseInt(e.target.value, 10) : '')}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="rescheduleUnit"
-                        render={({ field }) => (
-                            <FormItem className="flex-1">
-                                <FormLabel>Reschedule Unit</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="rescheduleTime"
+                            render={({ field }) => (
+                                <FormItem className="flex-1">
+                                    <FormLabel>Reschedule Time</FormLabel>
                                     <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select unit" />
-                                        </SelectTrigger>
+                                        <Input
+                                            type="number"
+                                            {...field}
+                                            onChange={(e) => field.onChange(e.target.value ? parseInt(e.target.value, 10) : '')}
+                                        />
                                     </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="minutes">Minutes</SelectItem>
-                                        <SelectItem value="hours">Hours</SelectItem>
-                                        <SelectItem value="days">Days</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
-                <FormField
-                    control={form.control}
-                    name="csvFile"
-                    render={({ field: { onChange, value, ...rest } }) => (
-                        <FormItem>
-                            <FormLabel>Upload CSV</FormLabel>
-                            <div className="mb-4">
-                                <Button
-                                    type="button"
-                                    variant="outline"
-                                    onClick={handleDownloadTemplate}
-                                    className="w-full"
-                                >
-                                    <Download className="mr-2 h-4 w-4" />
-                                    Download Template
-                                </Button>
-                            </div>
-                            <FormControl>
-                                <div
-                                    className={`relative border-2 border-dashed rounded-lg p-6 ${isDragging ? 'border-primary bg-primary/10' : 'border-muted-foreground/25'
-                                        }`}
-                                    onDragOver={handleDragOver}
-                                    onDragLeave={handleDragLeave}
-                                    onDrop={handleDrop}
-                                >
-                                    <input
-                                        type="file"
-                                        accept=".csv"
-                                        onChange={handleFileChange}
-                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                        {...rest}
-                                    />
-                                    <div className="flex flex-col items-center justify-center space-y-2 text-center">
-                                        <Cloud className="h-10 w-10 text-muted-foreground" />
-                                        <div className="text-sm">
-                                            <span className="font-semibold">Choose a csv</span> or drag & drop it here
-                                        </div>
-                                        <div className="text-xs text-muted-foreground">
-                                            Up to 50 MB
-                                        </div>
-                                        {csvFileName && (
-                                            <div className="text-sm text-primary font-medium mt-2">
-                                                Selected: {csvFileName}
-                                            </div>
-                                        )}
-                                    </div>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="rescheduleUnit"
+                            render={({ field }) => (
+                                <FormItem className="flex-1">
+                                    <FormLabel>Reschedule Unit</FormLabel>
+                                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                        <FormControl>
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select unit" />
+                                            </SelectTrigger>
+                                        </FormControl>
+                                        <SelectContent>
+                                            <SelectItem value="minutes">Minutes</SelectItem>
+                                            <SelectItem value="hours">Hours</SelectItem>
+                                            <SelectItem value="days">Days</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+
+                    <FormField
+                        control={form.control}
+                        name="csvFile"
+                        render={({ field: { onChange, value, ...rest } }) => (
+                            <FormItem>
+                                <FormLabel>Upload CSV</FormLabel>
+                                <div className="mb-4">
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                        onClick={handleDownloadTemplate}
+                                        className="w-full"
+                                    >
+                                        <Download className="mr-2 h-4 w-4" />
+                                        Download Template
+                                    </Button>
                                 </div>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit" disabled={!form.watch('csvFile')}>Start Calls</Button>
-            </form>
-        </Form>
+                                <FormControl>
+                                    <div
+                                        className={`hover:bg-primary-foreground relative border-2 border-dashed rounded-lg p-6 ${isDragging ? 'border-primary bg-primary/10' : 'border-muted-foreground/25'
+                                            }`}
+                                        onDragOver={handleDragOver}
+                                        onDragLeave={handleDragLeave}
+                                        onDrop={handleDrop}
+                                    >
+                                        <input
+                                            type="file"
+                                            accept=".csv"
+                                            onChange={handleFileChange}
+                                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                            {...rest}
+                                        />
+                                        <div className="flex flex-col items-center justify-center space-y-2 text-center">
+                                            <CloudUpload className="h-10 w-10 text-muted-foreground" />
+                                            <div className="text-sm">
+                                                <span className="font-semibold">Choose a csv</span> or drag & drop it here
+                                            </div>
+                                            <div className="text-xs text-muted-foreground">
+                                                Up to 50 MB
+                                            </div>
+                                            {csvFileName && (
+                                                <div className="text-sm text-primary font-medium mt-2">
+                                                    Selected: {csvFileName}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <Button type="submit" disabled={!form.watch('csvFile')}>Start Calls</Button>
+                </form>
+            </Form>
+        </div>
     )
 }

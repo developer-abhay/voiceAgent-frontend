@@ -4,6 +4,7 @@ import Sidebar from "@/components/dashboard/Sidebar";
 import { Route, Routes } from "react-router-dom";
 import NotFound from "./NotFound";
 import AgentsList from "@/components/dashboard/AgentsList";
+import MakeCalls from "@/components/dashboard/MakeCalls";
 
 export default function Dashboard() {
     return (
@@ -14,6 +15,7 @@ export default function Dashboard() {
             {/* Components */}
             <Routes>
                 <Route path='/' element={<AgentsList />} />
+                <Route path='/make-calls' element={<MakeCalls />} />
                 <Route path='/call-logs' element={<CallLogs />} />
                 <Route path='/call-recordings' element={<CallRecording />} />
                 <Route path='*' element={<NotFound />} />
