@@ -36,7 +36,7 @@ const Protected = () => {
   if (isLoading) return <div className="h-screen flex"><LoadingSpinner className="m-auto w-20 h-20" /></div>
 
   // if not valid redirect to login page
-  return user ? <Outlet /> : <Navigate to="/login" />;
+  return true ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default Protected;

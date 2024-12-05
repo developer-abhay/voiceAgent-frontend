@@ -1,4 +1,4 @@
-import { pricingTiers } from "@/data/data"
+import { pricingTiers } from "@/data/dataUI"
 import { Badge } from "../ui/badge"
 import { Card, CardContent, CardHeader } from "../ui/card"
 import { ArrowRight, Check } from "lucide-react"

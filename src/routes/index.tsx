@@ -5,8 +5,9 @@ import NotFound from "@/pages/NotFound";
 import Protected from "./protected";
 import { isAuthenticated } from "./helper";
 import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
+import { LoadingSpinner } from "@/components/loader";
 
-const CreateAgent = React.lazy(() => import("@/pages/CreateAgent"));
+const CreateAgent = React.lazy(() => import("@/pages/Agents"));
 const Dashboard = React.lazy(() => import("@/pages/Dashboard"));
 
 const router = createBrowserRouter(createRoutesFromElements(
@@ -17,8 +18,8 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route path='register' element={<AuthPage />} loader={async () => await isAuthenticated()} />
         {/* Protected Routes */}
         <Route element={<Protected />}>
-            <Route path='create-agent' element={<Suspense fallback={<div>Loading...</div>}><CreateAgent /></Suspense>} />
-            <Route path='dashboard/*' element={<Suspense fallback={<div>Loading...</div>}><Dashboard /></Suspense>} />
+            <Route path='agents/:agentId' element={<Suspense fallback={<div className="h-screen flex"><LoadingSpinner className="w-20 h-20 m-auto" /></div>}><CreateAgent /></Suspense>} />
+            <Route path='dashboard/*' element={<Suspense fallback={<div className="h-screen flex"><LoadingSpinner className="w-20 h-20 m-auto" /></div>}><Dashboard /></Suspense>} />
         </Route>
         {/* Not found Route */}
         <Route path='*' element={<NotFound />} />

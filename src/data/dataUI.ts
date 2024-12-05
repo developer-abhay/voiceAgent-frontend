@@ -136,7 +136,6 @@ export const pricingTiers = [
         }
     }
 ]
-
 export const faqs = [
     {
         question: "Do I need to install HelloGenAI?",

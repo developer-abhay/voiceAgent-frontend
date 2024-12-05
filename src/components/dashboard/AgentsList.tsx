@@ -34,32 +34,46 @@ const templateOptions: TemplateOption[] = [
         title: "Start from blank",
         description: "",
         icon: <Plus className="h-8 w-8 text-muted-foreground" />,
-        route: '/create-agent'
+        route: '/agents'
     },
     {
         id: "sell",
         title: "Sell and Promotion",
         description: "Promote products, persuade clients into buying stuff.",
         icon: <Phone className="h-8 w-8 text-muted-foreground" />,
-        route: '/create-agent'
+        route: '/agents/1'
     },
     {
         id: "healthcare",
         title: "Healthcare Check-In",
         description: "Ask questions to gather information, can transfer call.",
         icon: <Phone className="h-8 w-8 text-muted-foreground" />,
-        route: '/create-agent'
+        route: '/agents/2'
     },
     {
         id: "notification",
         title: "Notification",
         description: "After giving the notification, end the call.",
         icon: <Phone className="h-8 w-8 text-muted-foreground" />,
-        route: '/create-agent'
-    }
+        route: '/agents/3'
+    },
+    {
+        id: "survey",
+        title: "Takes Survey",
+        description: "Collects data on different topics and usecases.",
+        icon: <Phone className="h-8 w-8 text-muted-foreground" />,
+        route: '/agents/4'
+    },
+    {
+        id: "support",
+        title: "Customer service and support",
+        description: "Can resolve user queries and Provide any necessary information.",
+        icon: <Phone className="h-8 w-8 text-muted-foreground" />,
+        route: '/agents/5'
+    },
 ]
 
-const Agents = () => {
+const AgentsList = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const navigate = useNavigate()
 
@@ -167,7 +181,11 @@ const Agents = () => {
                                 key={template.id}
                                 className="flex flex-col items-center rounded-lg border p-4 text-center hover:bg-muted/50"
                                 onClick={() => {
-                                    navigate(template.route)
+                                    if (template.id === 'blank') {
+                                        navigate(`${template.route}/${Math.ceil(Math.random() * 99999)}`)
+                                    } else {
+                                        navigate(template.route)
+                                    }
                                     setIsModalOpen(false)
                                 }}
                             >
@@ -189,4 +207,4 @@ const Agents = () => {
     )
 }
 
-export default Agents
+export default AgentsList

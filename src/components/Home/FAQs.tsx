@@ -1,4 +1,4 @@
-import { faqs } from "@/data/data"
+import { faqs } from "@/data/dataUI"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
 
 const FAQs = () => {

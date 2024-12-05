@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ArrowLeft, Bot, BrainCircuit, Mic2, Phone, Shield, Webhook } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -17,10 +17,14 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
+import { agentPrompts } from "@/data/agent"
 
 export default function CreateAgent() {
-    const [identity, setIdentity] = useState(`Given a conversation detail in a message, output the outcome as follows:\n1. If customer asked to reschedule the call, output should be \"Rescheduled Call - <Replace this with Rescheduled time from the customer conversation>\",\n2. If customer updated his address during the call, output should be \"Updated Address - <Replace this with Updated address from the customer conversation>\"\n3. If customer cancelled his order, output should be \"Order cancelled - <Replace this with Order cancellation reason from the customer conversation>`)
+    const { agentId } = useParams();
+
+    const [prompt, setPrompt] = useState("")
+    const [greetmessage, setGreetMessage] = useState("")
     const [testMessage, setTestMessage] = useState("")
     const [messages, setMessages] = useState([
         {
@@ -28,6 +32,12 @@ export default function CreateAgent() {
             content: "Namaste! I am shruti calling from the hatke?"
         }
     ])
+
+
+    useEffect(() => {
+        const newPrompt = agentPrompts.find((item) => item.id === agentId)?.prompt
+        setPrompt(newPrompt || "")
+    }, [])
 
     const handleSendMessage = (e: React.FormEvent) => {
         e.preventDefault()
@@ -98,15 +108,15 @@ export default function CreateAgent() {
                         </Select>
                     </div>
 
-                    {/* Identity section remains unchanged */}
+                    {/* Prompt section remains unchanged */}
                     <div className="rounded-lg border bg-card">
                         <div className="p-4">
-                            <h2 className="text-lg font-semibold">Identity</h2>
+                            <h2 className="text-lg font-semibold">Prompt</h2>
                             <Textarea
                                 className="mt-2 min-h-[200px]"
-                                placeholder="Enter agent identity..."
-                                value={identity}
-                                onChange={(e) => setIdentity(e.target.value)}
+                                placeholder="Enter agent prompt..."
+                                value={prompt}
+                                onChange={(e) => setPrompt(e.target.value)}
                             />
                         </div>
                     </div>
